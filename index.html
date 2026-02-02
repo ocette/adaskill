@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adaskill</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Titre -->
+    <header>
+      <h1>Compétences en cuisine</h1>
+    </header>
+
+    <main>
+      <!-- Section plats -->
+      <section>
+        <article class="card">
+          <div>
+            <h2>Plats</h2>
+          </div>
+          <div>
+            <ul>
+              <li>Tartiflette</li>
+              <input type="range" name="range" min="0" max="5" value="5" />
+              <li>Cassoulet</li>
+              <input type="range" name="range" min="0" max="5" value="0" />
+              <li>Nouilles sautées au boeuf</li>
+              <input type="range" name="range" min="0" max="5" value="4" />
+              <li>Couscous</li>
+              <input type="range" name="range" min="0" max="5" value="0" />
+            </ul>
+          </div>
+        </article>
+      </section>
+
+      <!-- Section pâtisseries -->
+      <section>
+        <article class="card">
+          <div>
+            <h2>Pâtisseries</h2>
+          </div>
+          <div>
+            <ul>
+              <li>Cake au citron</li>
+              <input type="range" name="range" min="0" max="5" value="5" />
+              <li>Tiramisu</li>
+              <input type="range" name="range" min="0" max="5" value="4" />
+              <li>Moelleux au chocolat</li>
+              <input type="range" name="range" min="0" max="5" value="5" />
+              <li>Framboisier</li>
+              <input type="range" name="range" min="0" max="5" value="0" />
+            </ul>
+          </div>
+        </article>
+      </section>
+
+      <!-- Formulaire ajout d'une nouvelle compétence -->
+      <div>
+        <form>
+          <input type="text" placeholder="Ajout d'un thème" />
+          <input type="text" placeholder="Ajout d'un niveau d'expertise" />
+          <input type="submit" value="Ajouter" />
+        </form>
+      </div>
+    </main>
+
+    <footer>
+      <p>Adaskill - 2026</p>
+    </footer>
+  </body>
+</html>
