@@ -1,0 +1,146 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
+
+/* Style global */
+:root {
+  --c-white: #f8ffe5;
+  --c-black: #2e282a;
+  --c-yellow: #ffbf52;
+  --c-card: #fceaca;
+
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+
+  --radius-sm: 0.5rem;
+  --radius-md: 1rem;
+  --radius-lg: 2rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Poppins, sans-serif;
+  background-color: var(--c-white);
+  color: var(--c-black);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.header {
+  padding: var(--spacing-md) var(--spacing-sm);
+  text-align: center;
+}
+
+.header_title {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* Main */
+
+.main {
+  flex: 1;
+  padding: var(--spacing-sm);
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.section {
+  margin-bottom: var(--spacing-lg);
+}
+
+/* Card */
+.card {
+  width: 100%;
+  padding: var(--spacing-md);
+  border-radius: var(--radius-lg);
+  background-color: var(--c-card);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card__header {
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 2px solid var(--c-yellow);
+}
+
+.card__title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--c-black);
+}
+
+.card_content {
+  .card__content {
+    width: 100%;
+  }
+}
+
+/* Skills */
+.skills_list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.skill_item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--c-black);
+}
+
+.skill-item_range {
+  width: 100%;
+  height: 10px;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: var(--c-yellow);
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Thumb styling pour Chrome/Safari */
+.skill-item_range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: var(--c-black);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+/* Footer */
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-md);
+  background-color: var(--c-yellow);
+  margin-top: auto;
+}
+
+.footer_text {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
