@@ -1,10 +1,15 @@
 require("dotenv").config();
 
 const express = require("express");
+const cors = require("cors");
 const { neon } = require("@neondatabase/serverless");
 
 const app = express();
 const PORT = process.env.PORT || 4242;
+
+//Middlewares
+app.use(cors());
+app.use(express.json());
 
 // Initialisation de la connexion Neon
 const sql = neon(`${process.env.DATABASE_URL}`);
@@ -16,49 +21,73 @@ app.get("/", async (_, res) => {
   res.json({ version });
 });
 
-app.get("/themes-skills", async (req, res) => {
-  const data = await sql`
-    SELECT 
-      themes.id AS theme_id,
-      themes.libelle,
-      skills.id AS skill_id,
-      skills.intitule,
-      skills.niveau
-    FROM themes
-    LEFT JOIN skills ON skills.themes_id = themes.id
-    ORDER BY themes.id
-  `;
-
-  res.json(data);
+// Récupérer tous les thèmes
+app.get("/themes", async (req, res) => {
+  try {
+    const themes = await sql`SELECT * FROM themes ORDER BY id`;
+    res.json(themes);
+  } catch (error) {
+    console.error("Erreur lors de la récupération des thèmes", error);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
 });
 
+// Récupérer tous les skills
+app.get("/skills", async (req, res) => {
+  try {
+    const skills = await sql`SELECT * FROM skills ORDER BY themes_id, id`;
+    res.json(skills);
+  } catch (error) {
+    console.error("Erreur lors de la récupération des skills", error);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
+});
+
+// Ajouter un thème
 app.post("/themes", express.json(), async (req, res) => {
-  const { libelle } = req.body;
+  try {
+    const { libelle } = req.body;
 
-  const result = await sql`
-    INSERT INTO themes (libelle)
-    VALUES (${libelle})
-    RETURNING *
-  `;
+    const result = await sql`
+      INSERT INTO themes (libelle)
+      VALUES (${libelle})
+      RETURNING *
+    `;
 
-  res.json(result[0]);
+    res.json(result[0]);
+  } catch (error) {
+    console.error("Erreur lors de l'ajout du thème", error);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
 });
 
+// Ajouter un skill
 app.post("/skills", express.json(), async (req, res) => {
-  const { intitule, niveau, themes_id } = req.body;
+  try {
+    const { intitule, niveau, themes_id } = req.body;
 
-  const result = await sql`
-    INSERT INTO skills (intitule, niveau, themes_id)
-    VALUES (${intitule}, ${niveau}, ${themes_id})
-    RETURNING *
-  `;
+    const result = await sql`
+      INSERT INTO skills (intitule, niveau, themes_id)
+      VALUES (${intitule}, ${niveau}, ${themes_id})
+      RETURNING *
+    `;
 
-  res.json(result[0]);
+    res.json(result[0]);
+  } catch (error) {
+    console.error("Erreur lors de l'ajout de la skill", error);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
 });
 
+// Supprimer un skill
 app.delete("/skills/:id", async (req, res) => {
-  await sql`DELETE FROM skills WHERE id = ${req.params.id}`;
-  res.json({ message: "Skill supprimé" });
+  try {
+    await sql`DELETE FROM skills WHERE id = ${req.params.id}`;
+    res.json({ message: "Skill supprimée" });
+  } catch (error) {
+    console.error("Erreur lors de la suppression", error);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
 });
 
 app.listen(PORT, () => {

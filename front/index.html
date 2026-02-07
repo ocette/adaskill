@@ -6,129 +6,24 @@
     <title>Adaskill</title>
     <link rel="stylesheet" href="/front/index.html" />
   </head>
+
+  <!-- Toutes les données sont injectées ici -->
   <body>
     <!-- Titre -->
     <header class="header">
-      <h1 class="header_title">Compétences en cuisine</h1>
-    </header>
-
-    <!-- Titre -->
-    <header class="header">
-      <h1 class="header_title">Compétences en cuisine</h1>
+      <h1 class="header_title">Compétences en cuisine 🍽️</h1>
     </header>
 
     <main class="main">
-      <!-- Section plats -->
-      <section class="section">
-        <article class="card">
-          <div class="card_header">
-            <h2 class="card_title">Plats</h2>
-          </div>
-          <div class="card_content">
-            <ul class="skills_list">
-              <li class="skill_item">Tartiflette</li>
-              <input
-                class="skill-item_range"
-                type="range"
-                name="range"
-                min="0"
-                max="5"
-                value="5"
-              />
-              <li class="skill_item">Cassoulet</li>
-              <input
-                class="skill-item_range"
-                type="range"
-                name="range"
-                min="0"
-                max="5"
-                value="0"
-              />
-              <li class="skill_item">Nouilles sautées au boeuf</li>
-              <input
-                class="skill-item_range"
-                type="range"
-                name="range"
-                min="0"
-                max="5"
-                value="4"
-              />
-              <li class="skill_item">Couscous</li>
-              <input
-                class="skill-item_range"
-                type="range"
-                name="range"
-                min="0"
-                max="5"
-                value="0"
-              />
-            </ul>
-          </div>
-        </article>
-      </section>
+      <div id="app"></div>
 
-      <!-- Section pâtisseries -->
-      <section class="section">
-        <article class="card">
-          <div class="card_header">
-            <h2 class="card_title">Pâtisseries</h2>
-          </div>
-          <div>
-            <ul class="skills_list">
-              <li class="skill_item">Cake au citron</li>
-              <input
-                class="skill-item_range"
-                type="range"
-                name="range"
-                min="0"
-                max="5"
-                value="5"
-              />
-              <li class="skill_item">Tiramisu</li>
-              <input
-                class="skill-item_range"
-                type="range"
-                name="range"
-                min="0"
-                max="5"
-                value="4"
-              />
-              <li class="skill_item">Moelleux au chocolat</li>
-              <input
-                class="skill-item_range"
-                type="range"
-                name="range"
-                min="0"
-                max="5"
-                value="5"
-              />
-              <li class="skill_item">Framboisier</li>
-              <input
-                class="skill-item_range"
-                type="range"
-                name="range"
-                min="0"
-                max="5"
-                value="0"
-              />
-            </ul>
-          </div>
-        </article>
-      </section>
-
-      <!-- Formulaire ajout d'une nouvelle compétence -->
-      <div>
-        <form>
-          <input type="text" placeholder="Ajout d'un thème" />
-          <input type="text" placeholder="Ajout d'un niveau d'expertise" />
-          <input type="submit" value="Ajouter" />
-        </form>
-      </div>
+      <form id="form">
+        <input id="theme" type="text" placeholder="Thème" required />
+        <input id="skill" type="text" placeholder="Compétence" required />
+        <input id="niveau" type="number" min="0" max="5" value="0" />
+        <button>Ajouter</button>
+      </form>
     </main>
-
-    <footer class="footer">
-      <p class="footer_text">Adaskill - 2026</p>
-    </footer>
 
     <script src="/front/script.js"></script>
   </body>
