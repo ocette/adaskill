@@ -4,27 +4,37 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Adaskill</title>
-    <link rel="stylesheet" href="/front/index.html" />
+    <link rel="stylesheet" href="/front/style.css" />
   </head>
 
-  <!-- Toutes les données sont injectées ici -->
   <body>
     <!-- Titre -->
     <header class="header">
       <h1 class="header_title">Compétences en cuisine 🍽️</h1>
     </header>
 
+    <!-- Toutes les données sont injectées ici -->
     <main class="main">
       <div id="app"></div>
 
       <form id="form">
-        <input id="theme" type="text" placeholder="Thème" required />
-        <input id="skill" type="text" placeholder="Compétence" required />
+        <select id="theme" required>
+          <option value="">Choisir un thème</option>
+        </select>
+        <input
+          id="skill"
+          type="text"
+          placeholder="Nom de la compétence"
+          required
+        />
         <input id="niveau" type="range" min="0" max="5" value="0" />
-        <button>Ajouter</button>
+        <button>Ajouter la compétence</button>
       </form>
     </main>
 
+    <footer class="footer">
+      <p class="footer_text">Adaskill - 2026</p>
+    </footer>
     <script src="/front/script.js"></script>
   </body>
 </html>

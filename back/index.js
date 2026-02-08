@@ -132,6 +132,19 @@ app.delete("/skills/:id", async (req, res) => {
   }
 });
 
+// Modifier le niveau
+app.patch("/skills/:id", async (req, res) => {
+  const { niveau } = req.body;
+
+  await sql`
+    UPDATE skills
+    SET niveau = ${niveau}
+    WHERE id = ${req.params.id}
+  `;
+
+  res.json({ message: "Niveau mis à jour" });
+});
+
 app.listen(PORT, () => {
   console.log(`Listening to http://localhost:${PORT}`);
 });
