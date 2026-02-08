@@ -54,9 +54,11 @@ adaskill/
 │
 └── README.md
 ```
+📄 Licence
 
-##📄 Licence
 Ce projet est libre de droits pour un usage éducatif.
 
-##👨‍💻 Auteur
+
+👨‍💻 Auteur
+
 Océane Thauvin
