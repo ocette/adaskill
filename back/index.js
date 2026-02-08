@@ -7,7 +7,7 @@ const { neon } = require("@neondatabase/serverless");
 const app = express();
 const PORT = process.env.PORT || 4242;
 
-//Middlewares
+// Middlewares
 app.use(cors());
 app.use(express.json());
 
@@ -22,7 +22,7 @@ app.get("/", async (_, res) => {
 });
 
 // Récupérer tous les thèmes
-app.get("/themes", async (req, res) => {
+app.get("/themes", async (_, res) => {
   try {
     const themes = await sql`SELECT * FROM themes ORDER BY id`;
     res.json(themes);
@@ -33,12 +33,54 @@ app.get("/themes", async (req, res) => {
 });
 
 // Récupérer tous les skills
-app.get("/skills", async (req, res) => {
+app.get("/skills", async (_, res) => {
   try {
     const skills = await sql`SELECT * FROM skills ORDER BY themes_id, id`;
     res.json(skills);
   } catch (error) {
     console.error("Erreur lors de la récupération des skills", error);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
+});
+
+// Récupérer les thèmes et skills associés
+app.get("/themes-with-skills", async (_, res) => {
+  try {
+    const rows = await sql`
+      SELECT 
+        themes.id AS theme_id,
+        themes.libelle,
+        skills.id AS skill_id,
+        skills.intitule,
+        skills.niveau
+      FROM themes
+      LEFT JOIN skills ON skills.themes_id = themes.id
+      ORDER BY themes.id, skills.id
+    `;
+
+    // Regroupement
+    const themesMap = {};
+
+    rows.forEach((row) => {
+      if (!themesMap[row.theme_id]) {
+        themesMap[row.theme_id] = {
+          id: row.theme_id,
+          libelle: row.libelle,
+          skills: [],
+        };
+      }
+
+      if (row.skill_id) {
+        themesMap[row.theme_id].skills.push({
+          id: row.skill_id,
+          intitule: row.intitule,
+          niveau: row.niveau,
+        });
+      }
+    });
+    res.json(Object.values(themesMap));
+  } catch (error) {
+    console.error("Erreur lors de la récupération des éléments", error);
     res.status(500).json({ error: "Erreur serveur" });
   }
 });
