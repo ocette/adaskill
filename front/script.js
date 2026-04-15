@@ -6,7 +6,7 @@ const niveauInput = form.querySelector("input[type=range]");
 
 async function loadData() {
   try {
-    const response = await fetch("http://localhost:4242/themes-with-skills");
+    const response = await fetch("/api/themes-with-skills");
     const themes = await response.json();
 
     app.innerHTML = ""; // Vide le contenu actuel
@@ -66,7 +66,7 @@ function renderTheme(theme) {
 
     // Mettre à jour le niveau en temps réel
     range.addEventListener("change", async () => {
-      await fetch(`http://localhost:4242/skills/${skill.id}`, {
+      await fetch(`/api/skills/${skill.id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ niveau: range.value }),
@@ -98,7 +98,7 @@ function renderTheme(theme) {
 
 // Pour supprimer un skill
 async function deleteSkill(id) {
-  await fetch(`http://localhost:4242/skills/${id}`, {
+  await fetch(`/api/skills/${id}`, {
     method: "DELETE",
   });
 }
@@ -113,7 +113,7 @@ form.addEventListener("submit", async (e) => {
 
   if (!themes_id) return;
 
-  await fetch("http://localhost:4242/skills", {
+  await fetch("/api/skills", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
