@@ -1,5 +1,3 @@
-# adaskill
-
 # 🍽️ Adaskill - Gestionnaire de Compétences
 
 ![Adaskill](./thumbnail.png)
