@@ -15,14 +15,14 @@ app.use(express.json());
 const sql = neon(`${process.env.DATABASE_URL}`);
 
 // Route de test
-app.get("/", async (_, res) => {
+app.get("/api", async (_, res) => {
   const response = await sql`SELECT version()`;
   const { version } = response[0];
   res.json({ version });
 });
 
 // Récupérer tous les thèmes
-app.get("/themes", async (_, res) => {
+app.get("/api/themes", async (_, res) => {
   try {
     const themes = await sql`SELECT * FROM themes ORDER BY id`;
     res.json(themes);
@@ -33,7 +33,7 @@ app.get("/themes", async (_, res) => {
 });
 
 // Récupérer tous les skills
-app.get("/skills", async (_, res) => {
+app.get("/api/skills", async (_, res) => {
   try {
     const skills = await sql`SELECT * FROM skills ORDER BY themes_id, id`;
     res.json(skills);
@@ -44,7 +44,7 @@ app.get("/skills", async (_, res) => {
 });
 
 // Récupérer les thèmes et skills associés
-app.get("/themes-with-skills", async (_, res) => {
+app.get("/api/themes-with-skills", async (_, res) => {
   try {
     const rows = await sql`
       SELECT 
@@ -86,7 +86,7 @@ app.get("/themes-with-skills", async (_, res) => {
 });
 
 // Ajouter un thème
-app.post("/themes", express.json(), async (req, res) => {
+app.post("/api/themes", express.json(), async (req, res) => {
   try {
     const { libelle } = req.body;
 
@@ -104,7 +104,7 @@ app.post("/themes", express.json(), async (req, res) => {
 });
 
 // Ajouter un skill
-app.post("/skills", express.json(), async (req, res) => {
+app.post("/api/skills", express.json(), async (req, res) => {
   try {
     const { intitule, niveau, themes_id } = req.body;
 
@@ -122,7 +122,7 @@ app.post("/skills", express.json(), async (req, res) => {
 });
 
 // Supprimer un skill
-app.delete("/skills/:id", async (req, res) => {
+app.delete("/api/skills/:id", async (req, res) => {
   try {
     await sql`DELETE FROM skills WHERE id = ${req.params.id}`;
     res.json({ message: "Skill supprimée" });
@@ -133,7 +133,7 @@ app.delete("/skills/:id", async (req, res) => {
 });
 
 // Modifier le niveau
-app.patch("/skills/:id", async (req, res) => {
+app.patch("/api/skills/:id", async (req, res) => {
   const { niveau } = req.body;
 
   await sql`
@@ -148,3 +148,5 @@ app.patch("/skills/:id", async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Listening to http://localhost:${PORT}`);
 });
+
+module.exports = app;
